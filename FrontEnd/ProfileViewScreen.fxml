@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane
+        xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="ProfileViewController"
+        prefWidth="600" prefHeight="700"
+        style="-fx-background-color: #1a1f2e;">
+
+    <VBox spacing="0">
+
+        <!-- Top Nav Bar -->
+        <HBox
+                alignment="CENTER_LEFT"
+                spacing="14"
+                style="-fx-background-color: #222736;
+                   -fx-border-color: rgba(255,255,255,0.06);
+                   -fx-border-width: 0 0 1 0;"
+                prefHeight="60">
+            <padding><Insets left="16" right="24"/></padding>
+
+            <!-- Back Arrow -->
+            <Button fx:id="backButton"
+                    text="&#8592;"
+                    onAction="#handleBack"
+                    style="-fx-background-color: transparent;
+                       -fx-text-fill: #aaaaaa;
+                       -fx-font-size: 20px;
+                       -fx-cursor: hand;
+                       -fx-padding: 2 10 2 10;
+                       -fx-background-radius: 8;
+                       -fx-border-width: 0;"/>
+
+            <!-- Logo -->
+            <StackPane
+                    minWidth="36" minHeight="36"
+                    maxWidth="36" maxHeight="36"
+                    style="-fx-background-color: #2ecc71;
+                       -fx-background-radius: 8;">
+                <Label text="N"
+                       style="-fx-text-fill: white;
+                           -fx-font-size: 16px;
+                           -fx-font-weight: bold;"/>
+            </StackPane>
+            <Label text="Nust Nest"
+                   style="-fx-text-fill: #f0f0f0;
+                       -fx-font-size: 16px;
+                       -fx-font-weight: bold;"/>
+            <Label text="SEECS Edition"
+                   style="-fx-text-fill: #2ecc71;
+                       -fx-font-size: 12px;
+                       -fx-font-weight: 600;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- Content -->
+        <VBox VBox.vgrow="ALWAYS">
+            <padding><Insets top="40" left="60" right="60" bottom="40"/></padding>
+
+            <!-- Profile Picture -->
+            <StackPane
+                    minWidth="100" minHeight="100"
+                    maxWidth="100" maxHeight="100"
+                    style="-fx-background-color: #2a2f40;
+                       -fx-background-radius: 50;"
+                    alignment="CENTER">
+                <VBox.margin><Insets bottom="20"/></VBox.margin>
+
+                <!-- Initials fallback -->
+                <Label fx:id="pfpInitials"
+                       text="?"
+                       style="-fx-text-fill: #2ecc71;
+                           -fx-font-size: 34px;
+                           -fx-font-weight: bold;"/>
+
+                <!-- Image shown when pfpPath is set -->
+                <StackPane fx:id="pfpImagePane"
+                           visible="false" managed="false"
+                           minWidth="100" minHeight="100"
+                           maxWidth="100" maxHeight="100"/>
+
+                <!-- Camera overlay — visible only in edit mode -->
+                <Button fx:id="changePfpButton"
+                        text="&#128247;"
+                        onAction="#handleChangePfp"
+                        visible="false" managed="false"
+                        style="-fx-background-color: rgba(0,0,0,0.55);
+                           -fx-background-radius: 50;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;
+                           -fx-border-width: 0;
+                           -fx-padding: 0;"
+                        minWidth="100" minHeight="100"
+                        maxWidth="100" maxHeight="100"/>
+            </StackPane>
+
+            <!-- ── NAME ── -->
+            <Label text="FULL NAME"
+                   style="-fx-text-fill: #555555;
+                       -fx-font-size: 10px;
+                       -fx-font-weight: bold;">
+                <VBox.margin><Insets bottom="6"/></VBox.margin>
+            </Label>
+
+            <!-- View mode -->
+            <Label fx:id="nameLabel"
+                   text=""
+                   style="-fx-text-fill: #f0f0f0;
+                       -fx-font-size: 20px;
+                       -fx-font-weight: bold;">
+                <VBox.margin><Insets bottom="24"/></VBox.margin>
+            </Label>
+
+            <!-- Edit mode -->
+            <TextField fx:id="nameField"
+                       visible="false" managed="false"
+                       promptText="Full name"
+                       style="-fx-background-color: #2a2f40;
+                       -fx-text-fill: #f0f0f0;
+                       -fx-font-size: 14px;
+                       -fx-background-radius: 10;
+                       -fx-border-color: rgba(255,255,255,0.12);
+                       -fx-border-radius: 10;
+                       -fx-border-width: 1;
+                       -fx-padding: 0 14 0 14;"
+                       prefHeight="42">
+                <VBox.margin><Insets bottom="24"/></VBox.margin>
+            </TextField>
+
+            <!-- ── BIO ── -->
+            <Label text="BIO"
+                   style="-fx-text-fill: #555555;
+                       -fx-font-size: 10px;
+                       -fx-font-weight: bold;">
+                <VBox.margin><Insets bottom="6"/></VBox.margin>
+            </Label>
+
+            <!-- View mode -->
+            <Label fx:id="bioLabel"
+                   text="No bio added yet."
+                   wrapText="true"
+                   style="-fx-text-fill: #aaaaaa;
+                       -fx-font-size: 13px;">
+                <VBox.margin><Insets bottom="28"/></VBox.margin>
+            </Label>
+
+            <!-- Edit mode -->
+            <TextArea fx:id="bioField"
+                      visible="false" managed="false"
+                      promptText="Tell others about yourself..."
+                      wrapText="true"
+                      prefHeight="90"
+                      style="-fx-background-color: #2a2f40;
+                       -fx-text-fill: #f0f0f0;
+                       -fx-font-size: 13px;
+                       -fx-background-radius: 10;
+                       -fx-border-color: rgba(255,255,255,0.12);
+                       -fx-border-radius: 10;
+                       -fx-border-width: 1;">
+                <VBox.margin><Insets bottom="4"/></VBox.margin>
+            </TextArea>
+
+            <!-- Char count (edit mode only) -->
+            <Label fx:id="bioCharCount"
+                   text="0 / 150"
+                   visible="false" managed="false"
+                   style="-fx-text-fill: #555555;
+                       -fx-font-size: 11px;
+                       -fx-alignment: center-right;">
+                <VBox.margin><Insets bottom="28"/></VBox.margin>
+            </Label>
+
+            <!-- Error -->
+            <Label fx:id="errorLabel"
+                   text=""
+                   style="-fx-text-fill: #e74c3c;
+                       -fx-font-size: 12px;">
+                <VBox.margin><Insets bottom="8"/></VBox.margin>
+            </Label>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Action Buttons -->
+            <HBox spacing="12" alignment="CENTER_RIGHT">
+
+                <!-- Cancel (edit mode only) -->
+                <Button fx:id="cancelButton"
+                        text="Cancel"
+                        onAction="#handleCancel"
+                        visible="false" managed="false"
+                        style="-fx-background-color: transparent;
+                           -fx-text-fill: #888888;
+                           -fx-font-size: 13px;
+                           -fx-background-radius: 10;
+                           -fx-border-color: rgba(255,255,255,0.12);
+                           -fx-border-radius: 10;
+                           -fx-border-width: 1;
+                           -fx-cursor: hand;
+                           -fx-padding: 8 20 8 20;"/>
+
+                <!-- Edit Profile / Save Changes -->
+                <Button fx:id="editSaveButton"
+                        text="Edit Profile"
+                        onAction="#handleEditSave"
+                        style="-fx-background-color: #2ecc71;
+                           -fx-text-fill: #0d1117;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: bold;
+                           -fx-background-radius: 10;
+                           -fx-border-width: 0;
+                           -fx-cursor: hand;
+                           -fx-padding: 8 24 8 24;"/>
+            </HBox>
+
+        </VBox>
+    </VBox>
+
+</StackPane>
